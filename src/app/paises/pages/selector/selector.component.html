@@ -1,0 +1,65 @@
+<div class="container" *ngIf="!cargando">
+    <h1>Selectores</h1>
+<hr>
+
+<form  action="" [formGroup]="FormularioSelector" (ngSubmit)="guardar()">
+
+    <!-- continente -->
+    <div class="row">
+        <div class="col">
+            <label class="form-label">Continente:</label>
+            <select class="form-control" formControlName="region">
+                <option value=""> -- Seleccione Continente --</option>
+                <option *ngFor="let item of regiones" [value]="item | lowercase" >{{item}}</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- paises -->
+    <div class="row" *ngIf="paises.length !== 0">
+        <div class="col">
+            <label class="form-label">Pais:</label>
+            <select class="form-control" formControlName="pais">
+                <option value="" selected> -- Seleccione el pais --</option>
+                <option *ngFor="let pais of paises" [value]="pais.cca3" >{{pais.name['common']}}</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- fronteras -->
+    <div class="row" *ngIf="fronteras.length > 0">
+        <div class="col">
+            <label class="form-label">Fronteras:</label>
+            <select class="form-control" formControlName="frontera">
+                <option value=""> -- Seleccione la frontera --</option>
+                <option *ngFor="let frontera of fronteras" [value]="frontera" >{{frontera}}</option>
+            </select>
+        </div>
+    </div>
+<br>
+<br>
+<br>
+<br>
+  
+    <div class="row">
+        <div class="col">
+            <button class="btn mt-4 float-end" type="submit">Seleccionar</button>
+        </div>
+    </div>
+</form>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h3>Formulario</h3>
+
+<pre>{{FormularioSelector.valid}}</pre>
+<pre>{{FormularioSelector.value | json}}</pre>
+
+</div>
+
+<app-loading *ngIf="cargando"></app-loading>
